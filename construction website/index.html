@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PrimeBuild Construction | Home</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Background Slideshow Styles */
+    .background-slideshow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .background-slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .background-slideshow img.active {
+      opacity: 1;
+    }
+
+    /* Overlay (optional dimming layer) */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: -1;
+    }
+
+    /* Dropdown Menu Styles */
+    .dropdown-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10000;
+    }
+
+    .dropdown-button {
+      background-color: #ff9800;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 45px;
+      left: 0;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 10001;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: #333;
+      padding: 10px 15px;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Slideshow -->
+  <div class="background-slideshow">
+    <img src="images/j.21.jpeg" alt="Construction Site">
+    <img src="images/j.22.jpeg" alt="Building Project">
+    <img src="images/j.23.jpeg" alt="Construction Team">
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Dropdown Menu -->
+  <div class="dropdown-container">
+    <button class="dropdown-button" onclick="toggleDropdown()">☰ Menu</button>
+    <div class="dropdown-content" id="dropdown-menu">
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="location.html">Location</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">PrimeBuild</div>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="location.html">Location</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Building Your Vision, Crafting Your Future</h1>
+        <p>PrimeBuild Construction delivers exceptional quality and craftsmanship for residential and commercial projects. With over 20 years of experience, we turn your dreams into reality.</p>
+        <a href="services.html" class="btn">Our Services</a>
+        <a href="contact.html" class="btn">Get a Quote</a>
+        <a href="booking.html" class="btn" style="background-color: #28a745;">Book Now</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Why Choose PrimeBuild?</h2>
+        <div class="features">
+          <div class="feature">
+            <h3>Expert Craftsmanship</h3>
+            <p>Our skilled team brings decades of experience to every project.</p>
+          </div>
+          <div class="feature">
+            <h3>Quality Materials</h3>
+            <p>We use only the highest quality materials from trusted suppliers.</p>
+          </div>
+          <div class="feature">
+            <h3>On-Time Delivery</h3>
+            <p>We pride ourselves on completing projects on schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 PrimeBuild Construction. All rights reserved.</p>
+      <p>123 Construction Way, Building City, BC 12345 | Phone: (+254) 11741263</p>
+    </div>
+  </footer>
+
+  <!-- Chatbot Toggle Button -->
+  <div id="chatbot-toggle" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    background-color: #ff9800;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    line-height: 60px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  ">💬</div>
+
+  <!-- Chatbot Box -->
+  <div id="chatbot-box" style="
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 300px;
+    max-height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    z-index: 9998;
+  ">
+    <div style="background-color: #ff9800; color: white; padding: 1rem; font-weight: bold;">
+      PrimeBot Assistant
+      <span style="float:right; cursor:pointer;" onclick="document.getElementById('chatbot-box').style.display='none'">✖</span>
+    </div>
+    <div id="chat-messages" style="padding: 1rem; height: 200px; overflow-y: auto; font-size: 0.9rem;">
+      <p><strong>Bot:</strong> Hello! How can I assist you today?</p>
+    </div>
+    <div style="display: flex; border-top: 1px solid #ccc;">
+      <input type="text" id="chat-input" placeholder="Type a message..." style="flex:1; padding: 0.5rem; border:none; outline:none;">
+      <button onclick="sendMessage()" style="background:#ff9800; border:none; padding: 0.5rem 1rem; cursor:pointer;">➤</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Background slideshow logic
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".background-slideshow img");
+
+    function showSlides() {
+      slides.forEach((img) => img.classList.remove("active"));
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add("active");
+    }
+
+    // Start slideshow
+    if (slides.length > 0) {
+      slides[0].classList.add("active");
+      setInterval(showSlides, 1000); // Change image every 1 second
+    }
+
+    // Chatbot toggle logic
+    const toggleBtn = document.getElementById('chatbot-toggle');
+    const chatBox = document.getElementById('chatbot-box');
+
+    toggleBtn.onclick = () => {
+      chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+    };
+
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const messages = document.getElementById('chat-messages');
+      const userText = input.value.trim();
+
+      if (userText !== '') {
+        const userMsg = document.createElement('p');
+        userMsg.innerHTML = `<strong>You:</strong> ${userText}`;
+        messages.appendChild(userMsg);
+        messages.scrollTop = messages.scrollHeight;
+
+        const response = await fetch('chatbot.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userText })
+        });
+
+        const data = await response.json();
+        const botReply = data.reply || "Sorry, I couldn't process that.";
+
+        const botMsg = document.createElement('p');
+        botMsg.innerHTML = `<strong>Bot:</strong> ${botReply}`;
+        messages.appendChild(botMsg);
+
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    // Dropdown toggle logic
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdown-menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdownBtn = document.querySelector('.dropdown-button');
+      const dropdownMenu = document.getElementById('dropdown-menu');
+      if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

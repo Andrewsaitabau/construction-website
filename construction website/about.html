@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBuild Construction | About Us</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-text h2 {
+            color: #ff9800;
+            margin-bottom: 1rem;
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #ff9800;
+        }
+
+        .team-member h3 {
+            color: #ff9800;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .location-map {
+            height: 400px;
+            margin-top: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .sustainability {
+            margin-top: 3rem;
+            background-color: purple;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .sustainability h2 {
+            color: #4caf50;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="images/j.21.jpeg" alt="Construction Site">
+        <img src="images/j.22.jpeg" alt="Building Project">
+        <img src="images/j.23.jpeg" alt="Construction Team">
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">PrimeBuild</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="location.html">Location</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">About PrimeBuild Construction</h1>
+
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://source.unsplash.com/random/800x600/?construction" alt="Our Team">
+                    </div>
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2003, PrimeBuild Construction has grown from a small local contractor to one of the region's most trusted construction firms. What began as a family-owned business with just a handful of employees has blossomed into a full-service construction company with over 150 skilled professionals.</p>
+
+                        <h2>Our Mission</h2>
+                        <p>We are committed to building structures of exceptional quality while providing an outstanding client experience. Our mission is to deliver projects that stand the test of time through craftsmanship, integrity, and innovative solutions.</p>
+
+                        <h2>Our Values</h2>
+                        <p>At PrimeBuild, we operate with core values that guide every project: Quality, Safety, Integrity, Innovation, and Client Satisfaction. These principles are the foundation of our company culture and the reason our clients continue to choose us year after year.</p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 3rem;">Our Leadership Team</h2>
+
+                <div class="team-members">
+                    <div class="team-member">
+                        <img src="https://source.unsplash.com/random/300x300/?man" alt="John Smith">
+                        <h3>John Smith</h3>
+                        <p class="position">Founder & CEO</p>
+                        <p>30+ years in construction industry</p>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://source.unsplash.com/random/300x300/?woman" alt="Sarah Johnson">
+                        <h3>Sarah Johnson</h3>
+                        <p class="position">Chief Operations Officer</p>
+                        <p>Specializes in project management</p>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://source.unsplash.com/random/300x300/?man,portrait" alt="Michael Chen">
+                        <h3>Michael Chen</h3>
+                        <p class="position">Director of Construction</p>
+                        <p>Expert in commercial builds</p>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="https://source.unsplash.com/random/300x300/?woman,professional" alt="Lisa Rodriguez">
+                        <h3>Lisa Rodriguez</h3>
+                        <p class="position">Design Director</p>
+                        <p>Architectural design specialist</p>
+                    </div>
+                </div>
+
+                <div class="sustainability">
+                    <h2>Our Commitment to Sustainability</h2>
+                    <p>At PrimeBuild Construction, sustainability is more than a trend — it’s a responsibility. We utilize green building practices, energy-efficient materials, and waste-reduction techniques to ensure every project contributes positively to the environment. We proudly follow LEED certification principles and work with local suppliers to reduce our carbon footprint.</p>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 3rem;">Our Location</h2>
+
+                <div class="location-info">
+                    <p>Visit our headquarters to discuss your next project:</p>
+                    <address>
+                        <strong>PrimeBuild Construction</strong><br>
+                        Narok-Mai Mahiu Road<br>
+                        Narok Town, Kenya<br>
+                        Phone: +254 700 123456<br>
+                        Email: info@primebuild.com
+                    </address>
+                </div>
+
+                <div class="location-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.659072043677!2d35.85580961475399!3d-1.0807990992125196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182c4b1d8c0a1b1b%3A0x3e3e3e3e3e3e3e3e!2sNarok%20Town%2C%20Kenya!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 PrimeBuild Construction. All rights reserved.</p>
+            <p>Narok-Mai Mahiu Road, Narok Town, Kenya | Phone: +254 700 123456</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

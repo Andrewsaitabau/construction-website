@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBuild Construction | Live Project Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary: #ff9800;
+            --secondary: #333;
+            --success: #4caf50;
+            --info: #2196f3;
+            --warning: #ffeb3b;
+            --danger: #f44336;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--danger);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .live-badge::before {
+            content: "";
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .project-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-planning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .status-ongoing {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .status-completed {
+            background-color: var(--info);
+            color: white;
+        }
+        
+        .status-delayed {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .project-progress {
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            background-color: var(--primary);
+            position: relative;
+            transition: width 1s ease-in-out;
+        }
+        
+        .progress-bar::after {
+            content: attr(data-progress);
+            position: absolute;
+            right: 0;
+            top: -25px;
+            background-color: var(--primary);
+            color: white;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .milestone-container {
+            margin-top: 1rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.3);
+            padding-top: 1rem;
+        }
+        
+        .milestone-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .milestone-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        
+        .milestone-item {
+            display: flex;
+            align-items: center;
+            padding: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+        
+        .milestone-item.completed {
+            opacity: 0.7;
+        }
+        
+        .milestone-item.completed::before {
+            content: "✓";
+            color: var(--success);
+            margin-right: 0.5rem;
+        }
+        
+        .milestone-item.pending::before {
+            content: "◯";
+            color: var(--warning);
+            margin-right: 0.5rem;
+        }
+        
+        .milestone-date {
+            margin-left: auto;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .webcam-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .webcam-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .webcam-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .webcam-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .webcam-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Dashboard Overview Section */
+        .dashboard-overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .overview-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .overview-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .overview-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .overview-card .label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Project Health Indicator */
+        .health-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .health-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .health-good {
+            background-color: var(--success);
+        }
+        
+        .health-warning {
+            background-color: var(--warning);
+        }
+        
+        .health-critical {
+            background-color: var(--danger);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .dashboard-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation for real-time updates */
+        @keyframes highlightUpdate {
+            0% { background-color: rgba(255, 152, 0, 0.3); }
+            100% { background-color: transparent; }
+        }
+        
+        .updated {
+            animation: highlightUpdate 2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="images/j.21.jpeg" alt="Construction Site">
+        <img src="images/j.22.jpeg" alt="Building Project">
+        <img src="images/j.23.jpeg" alt="Construction Team">
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">PrimeBuild</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="location.html">Location</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Live Project Tracker</h1>
+                <p class="section-subtitle">Real-time updates on all active construction projects</p>
+                
+                <!-- Dashboard Overview -->
+                <div class="dashboard-overview">
+                    <div class="overview-card">
+                        <h3>Active Projects</h3>
+                        <div class="value">8</div>
+                        <div class="label">Currently in progress</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>On Schedule</h3>
+                        <div class="value">6</div>
+                        <div class="label">Meeting deadlines</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>Behind Schedule</h3>
+                        <div class="value">2</div>
+                        <div class="label">Needing attention</div>
+                    </div>
+                    <div class="overview-card">
+                        <h3>Total Completion</h3>
+                        <div class="value">42%</div>
+                        <div class="label">Across all projects</div>
+                        <div class="health-indicator">
+                            <div class="health-dot health-warning"></div>
+                            <span>Moderate progress</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Project with Webcam -->
+                <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Featured Project: Downtown Commercial Tower</h2>
+                <div class="project-card" style="margin-bottom: 3rem;">
+                    <div class="webcam-container">
+                        <img src="https://via.placeholder.com/800x450?text=Live+Construction+Cam" alt="Live Construction Feed" class="webcam-feed">
+                        <span class="live-badge"><i class="fas fa-circle"></i> LIVE</span>
+                        <div class="webcam-controls">
+                            <button class="webcam-btn" title="Fullscreen"><i class="fas fa-expand"></i></button>
+                            <button class="webcam-btn" title="Take Snapshot"><i class="fas fa-camera"></i></button>
+                            <button class="webcam-btn" title="Switch Camera"><i class="fas fa-sync-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Downtown Commercial Tower</h3>
+                            <span class="project-status status-ongoing">Phase 3: Structural Work</span>
+                        </div>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Central Business District</span>
+                            <span><i class="fas fa-calendar-alt"></i> Started: Jan 2023</span>
+                        </div>
+                        <p>25-story mixed-use development with retail, office, and residential spaces. Current focus on completing the steel framework for floors 15-20.</p>
+                        
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 65%;" data-progress="65%"></div>
+                        </div>
+                        <div class="project-stats">
+                            <span><i class="fas fa-hard-hat"></i> 65% Complete</span>
+                            <span><i class="fas fa-clock"></i> Est. Completion: Q2 2024</span>
+                            <span><i class="fas fa-users"></i> 48 Workers On Site</span>
+                        </div>
+                        
+                        <div class="milestone-container">
+                            <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Recent Milestones</div>
+                            <ul class="milestone-list">
+                                <li class="milestone-item completed">Foundation completed <span class="milestone-date">Mar 15, 2023</span></li>
+                                <li class="milestone-item completed">Underground parking finished <span class="milestone-date">May 22, 2023</span></li>
+                                <li class="milestone-item completed">Core structure to 10th floor <span class="milestone-date">Jul 30, 2023</span></li>
+                                <li class="milestone-item pending">Steel framework to 20th floor <span class="milestone-date">Due: Oct 15, 2023</span></li>
+                                <li class="milestone-item pending">Exterior cladding begins <span class="milestone-date">Due: Nov 1, 2023</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- All Projects Grid -->
+                <h2 style="margin-bottom: 1rem;">All Active Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/j8.jpeg" alt="Suburban Development">
+                            <span class="live-badge"><i class="fas fa-circle"></i> LIVE</span>
+                        </div>
+                        <div class="project-info">
+                            <h3>Greenfield Suburban Development</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Hillside Community</span>
+                                <span class="project-status status-ongoing">Phase 2: Framing</span>
+                            </div>
+                            <p>50-unit residential community with shared amenities and green spaces.</p>
+                            <div class="project-progress">
+                                <div class="progress-bar" style="width: 40%;" data-progress="40%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span><i class="fas fa-hard-hat"></i> 40% Complete</span>
+                                <span><i class="fas fa-clock"></i> Est. Completion: Q3 2024</span>
+                            </div>
+                            <div class="milestone-container">
+                                <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Next Milestone</div>
+                                <ul class="milestone-list">
+                                    <li class="milestone-item pending">Roofing begins <span class="milestone-date">Due: Sep 30, 2023</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/j2.jpeg" alt="Hospital Renovation">
+                        </div>
+                        <div class="project-info">
+                            <h3>Regional Hospital Expansion</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Medical District</span>
+                                <span class="project-status status-ongoing">Phase 1: Demolition</span>
+                            </div>
+                            <p>New wing addition and modernization of existing facilities.</p>
+                            <div class="project-progress">
+                                <div class="progress-bar" style="width: 30%;" data-progress="30%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span><i class="fas fa-hard-hat"></i> 30% Complete</span>
+                                <span><i class="fas fa-clock"></i> Est. Completion: Q1 2025</span>
+                            </div>
+                            <div class="health-indicator">
+                                <div class="health-dot health-critical"></div>
+                                <span>Behind schedule</span>
+                            </div>
+                            <div class="milestone-container">
+                                <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Next Milestone</div>
+                                <ul class="milestone-list">
+                                    <li class="milestone-item pending">Site preparation complete <span class="milestone-date">Due: Aug 30, 2023</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/j14.jpeg" alt="Historic Renovation">
+                        </div>
+                        <div class="project-info">
+                            <h3>Historic Building Renovation</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Old Town District</span>
+                                <span class="project-status status-ongoing">Phase 4: Interior</span>
+                            </div>
+                            <p>Restoration of 1920s landmark building for modern office use.</p>
+                            <div class="project-progress">
+                                <div class="progress-bar" style="width: 55%;" data-progress="55%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span><i class="fas fa-hard-hat"></i> 55% Complete</span>
+                                <span><i class="fas fa-clock"></i> Est. Completion: Q4 2023</span>
+                            </div>
+                            <div class="milestone-container">
+                                <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Recent Milestone</div>
+                                <ul class="milestone-list">
+                                    <li class="milestone-item completed">Exterior restoration complete <span class="milestone-date">Jul 10, 2023</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/j9.jpeg" alt="University Building">
+                        </div>
+                        <div class="project-info">
+                            <h3>University Science Center</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> State University Campus</span>
+                                <span class="project-status status-planning">Design Phase</span>
+                            </div>
+                            <p>New STEM education facility with advanced laboratories.</p>
+                            <div class="project-progress">
+                                <div class="progress-bar" style="width: 15%;" data-progress="15%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span><i class="fas fa-hard-hat"></i> 15% Complete</span>
+                                <span><i class="fas fa-clock"></i> Est. Completion: Q2 2025</span>
+                            </div>
+                            <div class="milestone-container">
+                                <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Next Milestone</div>
+                                <ul class="milestone-list">
+                                    <li class="milestone-item pending">Design approval <span class="milestone-date">Due: Sep 15, 2023</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/j15.jpeg" alt="Waterfront Resort">
+                        </div>
+                        <div class="project-info">
+                            <h3>Lakeside Resort Development</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Pine Lake</span>
+                                <span class="project-status status-planning">Permitting</span>
+                            </div>
+                            <p>Luxury resort with 100 rooms, spa, and conference facilities.</p>
+                            <div class="project-progress">
+                                <div class="progress-bar" style="width: 5%;" data-progress="5%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span><i class="fas fa-hard-hat"></i> 5% Complete</span>
+                                <span><i class="fas fa-clock"></i> Est. Completion: Q3 2025</span>
+                            </div>
+                            <div class="milestone-container">
+                                <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Next Milestone</div>
+                                <ul class="milestone-list">
+                                    <li class="milestone-item pending">Environmental approval <span class="milestone-date">Due: Oct 1, 2023</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/j5.jpeg" alt="Industrial Complex">
+                        </div>
+                        <div class="project-info">
+                            <h3>Industrial Manufacturing Complex</h3>
+                            <div class="project-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Commerce Park</span>
+                                <span class="project-status status-ongoing">Phase 3: Utilities</span>
+                            </div>
+                            <p>150,000 sq ft manufacturing facility with office space.</p>
+                            <div class="project-progress">
+                                <div class="progress-bar" style="width: 60%;" data-progress="60%"></div>
+                            </div>
+                            <div class="project-stats">
+                                <span><i class="fas fa-hard-hat"></i> 60% Complete</span>
+                                <span><i class="fas fa-clock"></i> Est. Completion: Q1 2024</span>
+                            </div>
+                            <div class="milestone-container">
+                                <div class="milestone-title"><i class="fas fa-flag-checkered"></i> Recent Milestone</div>
+                                <ul class="milestone-list">
+                                    <li class="milestone-item completed">Structural steel complete <span class="milestone-date">Aug 5, 2023</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 PrimeBuild Construction. All rights reserved.</p>
+            <p>123 Construction Way, Building City, BC 12345 | Phone: (555) 123-4567</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Simulate real-time updates
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update progress bars randomly to simulate live updates
+            setInterval(function() {
+                const progressBars = document.querySelectorAll('.progress-bar');
+                progressBars.forEach(bar => {
+                    const currentWidth = parseFloat(bar.style.width);
+                    if (currentWidth < 100) {
+                        const randomIncrement = Math.random() * 0.5;
+                        const newWidth = Math.min(currentWidth + randomIncrement, 100);
+                        bar.style.width = newWidth + '%';
+                        bar.setAttribute('data-progress', Math.round(newWidth) + '%');
+                        
+                        // Highlight the update
+                        bar.parentElement.parentElement.classList.add('updated');
+                        setTimeout(() => {
+                            bar.parentElement.parentElement.classList.remove('updated');
+                        }, 2000);
+                    }
+                });
+            }, 5000);
+            
+            // Webcam controls functionality
+            const webcamBtns = document.querySelectorAll('.webcam-btn');
+            webcamBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('fa-expand')) {
+                        // Toggle fullscreen
+                        const webcamContainer = this.closest('.webcam-container');
+                        if (!document.fullscreenElement) {
+                            webcamContainer.requestFullscreen().catch(err => {
+                                alert(`Error attempting to enable fullscreen: ${err.message}`);
+                            });
+                        } else {
+                            document.exitFullscreen();
+                        }
+                    } else if (icon.classList.contains('fa-camera')) {
+                        // Simulate snapshot
+                        alert('Snapshot saved to project gallery');
+                    } else if (icon.classList.contains('fa-sync-alt')) {
+                        // Simulate camera switch
+                        const webcamFeed = this.closest('.webcam-container').querySelector('.webcam-feed');
+                        webcamFeed.src = webcamFeed.src.includes('placeholder') ? 
+                            'https://via.placeholder.com/800x450?text=Alternate+Construction+Cam' : 
+                            'https://via.placeholder.com/800x450?text=Live+Construction+Cam';
+                    }
+                });
+            });
+            
+            // Simulate milestone completion
+            setInterval(function() {
+                const pendingItems = document.querySelectorAll('.milestone-item.pending');
+                if (pendingItems.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * pendingItems.length);
+                    const item = pendingItems[randomIndex];
+                    item.classList.remove('pending');
+                    item.classList.add('completed');
+                    item.innerHTML = item.innerHTML.replace('◯', '✓');
+                    item.style.color = '#4caf50';
+                    
+                    // Add new pending item
+                    const list = item.closest('.milestone-list');
+                    if (list.querySelectorAll('.milestone-item').length < 5) {
+                        const newItem = document.createElement('li');
+                        newItem.className = 'milestone-item pending';
+                        newItem.innerHTML = 'New task started <span class="milestone-date">Due: ' + 
+                            new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) + 
+                            '</span>';
+                        list.appendChild(newItem);
+                    }
+                }
+            }, 15000);
+        });
+    </script>
+</body>
+</html>

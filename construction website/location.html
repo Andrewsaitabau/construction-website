@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBuild Construction | Our Location</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .location-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .location-info h2 {
+            color: #ff9800;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: #ff9800;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .business-hours {
+            margin-top: 2rem;
+        }
+        
+        .business-hours table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .business-hours tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .business-hours td {
+            padding: 0.5rem;
+        }
+        
+        .business-hours td:last-child {
+            text-align: right;
+        }
+        
+        .location-map {
+            height: 100%;
+            min-height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .location-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-map {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="images/j.21.jpeg" alt="Construction Site">
+        <img src="images/j.22.jpeg" alt="Building Project">
+        <img src="images/j.23.jpeg" alt="Construction Team">
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">PrimeBuild</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="location.html" class="active">Location</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Visit Our Headquarters</h1>
+                
+                <div class="location-container">
+                    <div class="location-info">
+                        <h2>PrimeBuild Construction</h2>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon">📍</span>
+                                <span>Maasai Mara Road, Narok Town, Kenya</span>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <span class="contact-icon">📞</span>
+                                <span>Phone: (+254) 717 123 456</span>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <span class="contact-icon">✉️</span>
+                                <span>Email: info@primebuild.co.ke</span>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <span class="contact-icon">🌐</span>
+                                <span>Website: www.primebuild.co.ke</span>
+                            </div>
+                        </div>
+                        
+                        <div class="business-hours">
+                            <h3>Business Hours</h3>
+                            <table>
+                                <tr>
+                                    <td>Monday - Friday</td>
+                                    <td>8:00 AM - 5:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td>Saturday</td>
+                                    <td>9:00 AM - 1:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td>Sunday</td>
+                                    <td>Closed</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="cta" style="margin-top: 2rem;">
+                            <p>Want to schedule a meeting with our team?</p>
+                            <a href="contact.html" class="btn">Contact Us</a>
+                        </div>
+                    </div>
+                    
+                    <div class="location-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.489306267193!2d35.86021481475396!3d-1.080799099999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182c5e6e0c1a5a2d%3A0x1a3e3b3b3b3b3b3b!2sNarok%20Town!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                
+                <div class="additional-locations" style="margin-top: 4rem;">
+                    <h2 class="section-title">Other Locations</h2>
+                    
+                    <div class="locations-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div class="location-card" style="background-color: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #ff9800; margin-bottom: 1rem;">Nairobi Office</h3>
+                            <p>Kenyatta Avenue<br>Nairobi, Kenya</p>
+                            <p>Phone: (+254) 717 234 567</p>
+                        </div>
+                        
+                        <div class="location-card" style="background-color: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #ff9800; margin-bottom: 1rem;">Mombasa Office</h3>
+                            <p>Moi Avenue<br>Mombasa, Kenya</p>
+                            <p>Phone: (+254) 717 345 678</p>
+                        </div>
+                        
+                        <div class="location-card" style="background-color: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(5px);">
+                            <h3 style="color: #ff9800; margin-bottom: 1rem;">Kisumu Office</h3>
+                            <p>Oginga Odinga Street<br>Kisumu, Kenya</p>
+                            <p>Phone: (+254) 717 456 789</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 PrimeBuild Construction. All rights reserved.</p>
+            <p>Maasai Mara Road, Narok Town, Kenya | Phone: (+254) 717 123 456</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
