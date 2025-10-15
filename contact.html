@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBuild Construction | Contact Us</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .quote-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border-left: 4px solid #ff9800;
+        }
+        
+        .quote-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #ff9800;
+            margin-bottom: 1rem;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .contact-form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .btn-submit {
+            background-color: #ff9800;
+            color: #111;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: #ff9800;
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: #ff9800;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="images/j.21.jpeg" alt="Construction Site">
+        <img src="images/j.22.jpeg" alt="Building Project">
+        <img src="images/j.23.jpeg" alt="Construction Team">
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">PrimeBuild</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="location.html">Location</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="contact-hero">
+                    <h1 class="section-title">Build Your Vision With Us</h1>
+                    <p class="section-subtitle">We're ready to bring your construction dreams to life</p>
+                    
+                    <div class="quote-container">
+                        <p class="quote-text">"Quality is never an accident; it is always the result of intelligent effort."</p>
+                        <p class="quote-author">- Andrew Saitabau</p>
+                    </div>
+                </div>
+                
+                <div class="contact-container">
+                    <div class="contact-form">
+                        <h2>Send Us a Message</h2>
+                        <form action="#" method="POST">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject">
+                                    <option value="general">General Inquiry</option>
+                                    <option value="quote">Request a Quote</option>
+                                    <option value="careers">Careers</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h2>Our Commitment to You</h2>
+                        
+                        <div class="quote-container" style="margin-bottom: 2rem;">
+                            <p class="quote-text">"The quality of our buildings reflects the quality of our relationships with our clients."</p>
+                            <p class="quote-author">- PrimeBuild Philosophy</p>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <span class="contact-icon">📍</span>
+                            <div>
+                                <h3>Headquarters</h3>
+                                <p>Maasai Mara Road, Narok Town, Kenya</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <span class="contact-icon">📞</span>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+254 711741263</p>
+                                <p>+254 732307859</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <span class="contact-icon">✉️</span>
+                            <div>
+                                <h3>Email</h3>
+                                <p>info@primebuild.co.ke</p>
+                                <p>saa143978@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <span class="contact-icon">🕒</span>
+                            <div>
+                                <h3>Working Hours</h3>
+                                <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link">📱</a>
+                            <a href="#" class="social-link">💬</a>
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">📸</a>
+                            <a href="#" class="social-link">🔗</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-container" style="margin: 4rem auto; text-align: center;">
+                    <p class="quote-text">"We don't just build structures, we build relationships that stand the test of time."</p>
+                    <p class="quote-author">- PrimeBuild Core Value</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="container" style="margin-top: 4rem;">
+        <div class="contact-container">
+            <!-- Feedback & Complaints Form -->
+            <div class="contact-form">
+                <h2>Feedback & Complaints</h2>
+                <form action="submit_feedback.php" method="POST">
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select name="type" required>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Complaint">Complaint</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
+            </div>
+    
+            <!-- Ratings & Reviews -->
+            <div class="contact-form">
+                <h2>Rate Our Work</h2>
+                <form action="submit_rating.php" method="POST">
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="rateyo" id="rating"></div>
+                        <input type="hidden" name="rating" id="rating-value">
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Your Review</label>
+                        <textarea name="review" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Rating</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RateYo Plugin Scripts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script>
+        $(function () {
+            $("#rating").rateYo({
+                fullStar: true,
+                onSet: function (rating) {
+                    $("#rating-value").val(rating);
+                }
+            });
+        });
+    </script>
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 PrimeBuild Construction. All rights reserved.</p>
+            <p>Maasai Mara Road, Narok Town, Kenya | Phone: +254 717 123 456</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

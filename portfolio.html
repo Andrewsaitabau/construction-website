@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PrimeBuild Construction | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .portfolio-filter {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #ff9800;
+      color: #333;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      height: 250px;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .portfolio-info {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.8);
+      transition: bottom 0.3s;
+    }
+
+    .portfolio-item:hover .portfolio-info {
+      bottom: 0;
+    }
+
+    .portfolio-info h3 {
+      color: #ff9800;
+      margin-bottom: 0.5rem;
+    }
+
+    .virtual-tour, .brochure-download {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      margin-top: 3rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .virtual-tour iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .brochure-download a {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #ff9800;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .brochure-download a:hover {
+      background: #e68900;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Slideshow -->
+  <div class="background-slideshow">
+    <img src="images/j.21.jpeg" alt="Construction Site">
+    <img src="images/j.22.jpeg" alt="Building Project">
+    <img src="images/j.23.jpeg" alt="Construction Team">
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">PrimeBuild</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="location.html">Location</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">Our Portfolio</h1>
+        <p class="section-subtitle">Explore our completed projects and see the quality of our work</p>
+
+        <div class="portfolio-filter">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="residential">Residential</button>
+          <button class="filter-btn" data-filter="commercial">Commercial</button>
+          <button class="filter-btn" data-filter="renovation">Renovation</button>
+          <button class="filter-btn" data-filter="landscaping">Landscaping</button>
+        </div>
+
+        <div class="portfolio-grid">
+          <div class="portfolio-item" data-category="residential">
+            <img src="images/j3.jpeg" alt="Modern House">
+            <div class="portfolio-info">
+              <h3>Modern Family Home</h3>
+              <p>2500 sq ft custom home with smart technology integration</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="commercial">
+            <img src="images/j1.jpeg" alt="Office Building">
+            <div class="portfolio-info">
+              <h3>Downtown Office Complex</h3>
+              <p>15-story commercial building with retail space</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="renovation">
+            <img src="images/j7.jpeg" alt="Kitchen Renovation">
+            <div class="portfolio-info">
+              <h3>Luxury Kitchen Remodel</h3>
+              <p>Complete kitchen transformation with custom cabinetry</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="residential">
+            <img src="images/j6.jpeg" alt="Luxury Home">
+            <div class="portfolio-info">
+              <h3>Waterfront Estate</h3>
+              <p>8000 sq ft luxury home with pool and dock</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="landscaping">
+            <img src="images/j16.jpeg" alt="Landscape Design">
+            <div class="portfolio-info">
+              <h3>Residential Landscape</h3>
+              <p>Complete outdoor living space with pool and hardscaping</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="commercial">
+            <img src="images/j10.jpeg" alt="Restaurant">
+            <div class="portfolio-info">
+              <h3>Gourmet Restaurant</h3>
+              <p>Complete build-out of high-end dining establishment</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="renovation">
+            <img src="images/j5.jpeg" alt="Bathroom Renovation">
+            <div class="portfolio-info">
+              <h3>Master Bath Remodel</h3>
+              <p>Spa-like bathroom with custom tile work</p>
+            </div>
+          </div>
+
+          <div class="portfolio-item" data-category="residential">
+            <img src="images/j13.jpeg" alt="Apartment Building">
+            <div class="portfolio-info">
+              <h3>Multi-Family Complex</h3>
+              <p>24-unit apartment building with amenities</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Virtual Tour Section -->
+        <div class="virtual-tour">
+          <h2>Virtual Project Tour</h2>
+          <p>Take a guided video tour of one of our recent commercial builds.</p>
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </div>
+
+        <!-- Brochure Download Section -->
+        <div class="brochure-download">
+          <h2>Download Our Company Brochure</h2>
+          <p>Learn more about our services, team, and past achievements.</p>
+          <a href="docs/PrimeBuild_Brochure.pdf" download>Download Brochure (PDF)</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 PrimeBuild Construction. All rights reserved.</p>
+      <p>123 Construction Way, Building City, BC 12345 | Phone: (555) 123-4567</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Portfolio filtering
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const filter = this.getAttribute('data-filter');
+          portfolioItems.forEach(item => {
+            item.style.display = (filter === 'all' || item.dataset.category === filter) ? 'block' : 'none';
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
